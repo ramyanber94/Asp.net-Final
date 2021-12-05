@@ -9,6 +9,6 @@ namespace BoardGames_FinalProject.Models
         public int Quantity { get; set; }
 
         [JsonIgnore]
-        public double Subtotal => BoardGame.Price * Quantity;
+        public double Subtotal => BoardGame.PriceCa * Quantity;
     }
 }

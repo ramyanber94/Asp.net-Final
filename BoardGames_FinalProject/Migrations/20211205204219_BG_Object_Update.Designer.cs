@@ -4,14 +4,16 @@ using BoardGames_FinalProject.Models.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BoardGames_FinalProject.Migrations
 {
     [DbContext(typeof(BoardGameContext))]
-    partial class BoardGameContextModelSnapshot : ModelSnapshot
+    [Migration("20211205204219_BG_Object_Update")]
+    partial class BG_Object_Update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

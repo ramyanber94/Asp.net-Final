@@ -25,8 +25,9 @@
                     <a asp-action="List" asp-all-route-data="@routes"
                        class="text-white">Title</a>
                 </th>
+                <th>Picture</th>
                 <th>
-                    @{ routes.SetSortAndDirection(nameof(BoardGame.price), current); }
+                    @{ routes.SetSortAndDirection(nameof(BoardGame.price_ca), current); }
                     <a asp-action="List" asp-all-route-data="@routes"
                        class="text-white">Price</a>
                 </th>
@@ -36,21 +37,22 @@
         <tbody>
             @foreach (BoardGame boardGame in Model.BoardGames)
             {
-                <tr>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@boardGame.ID"
-                           asp-route-slug="@boardGame.name">
-                            @boardGame.name
-                        </a>
-                    </td>
-                    <td>@boardGame.price</td>
-                    <td>
-                        <button type="submit" name="id" value="@boardGame.ID"
-                                class="btn btn-primary">
-                            Add To Cart
-                        </button>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@boardGame.ID"
+                       asp-route-slug="@boardGame.name">
+                        @boardGame.name
+                    </a>
+                </td>
+                <td><img src="@boardGame.image_url" alt="@boardGame.name" width="100" class="img-thumbnail" /></td>
+                <td>@boardGame.price_ca</td>
+                <td>
+                    <button type="submit" name="id" value="@boardGame.ID"
+                            class="btn btn-primary">
+                        Add To Cart
+                    </button>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

@@ -5,25 +5,41 @@
     ViewData["Title"] = " | BoardGame Details";
 }
 
-<h1>BoardGame Details</h1>
+<h1 class="display-3">@Model.name</h1>
+<h3 class="display-5">$ @Model.price</h3>
 
-  
-        <table class="table table-bordered table-sm">
-            <thead>
-                <tr class="thead-dark">
-                    <th>Title:</th><th>@Html.DisplayFor(model => model.name)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                </tr>
-                <tr><td>Price:</td><td>@Html.DisplayFor(model => model.price)</td></tr>
-            </tbody>
-        </table>
+<div class="row">
+    <div class="col">
+        <p class="float-sm-left">@Model.min_players-@Model.max_players PLAYERS</p>
+    </div>
+    <div class="col">
+        <p class="float-sm-right">MINIMUM AGE: @Model.min_age YEARS</p>
+    </div>
+</div>
 
 
-<form asp-action="Add" asp-controller="Cart" method="post">
+<form asp-action="Add" asp-controller="Cart" method="post" class="mx-auto">
     <button type="submit" name="id" value="@Model.ID"
-        class="btn btn-primary">Add To Cart</button>
+            class="btn btn-primary">
+        Add To Cart
+    </button>
 </form>
-        
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-8">
+        @Html.Raw(Model.description.Replace("\r\n", "<br />"))
+    </div>
+    <div class="col-4">
+        <img src="@Html.DisplayFor(model => model.image_url)" width="300" alt="@Html.DisplayFor(model => model.name)" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <a asp-action="List" asp-controller="BoardGame" class="btn btn-info float-sm-right">Back to List</a>
+    </div>
+</div>
+

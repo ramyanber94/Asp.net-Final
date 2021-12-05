@@ -16,7 +16,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Tuxedo BoardGames @ViewBag.Title</title>
+    <title>The BoardGame Store @ViewBag.Title</title>
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -27,7 +27,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     @RenderSection("scripts", false)
 </head>
-<body>
+<body backgrou>
     <div class="container">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu"
@@ -44,12 +44,7 @@
                     </li>
                     <li class="nav-item @Nav.Active("BoardGame", current)">
                         <a class="nav-link" asp-action="List" asp-controller="BoardGame" asp-area="">
-                            <span class="fas fa-BoardGame-open"></span>&nbsp;BoardGames
-                        </a>
-                    </li>
-                    <li class="nav-item @Nav.Active("Author", current)">
-                        <a class="nav-link" asp-action="List" asp-controller="Author" asp-area="">
-                            <span class="fas fa-feather-alt"></span>&nbsp;Authors
+                            <span class="fas fa-dice-six"></span>&nbsp;BoardGames
                         </a>
                     </li>
                 </ul>
@@ -101,7 +96,7 @@
                 </ul>
             </div>
         </nav>
-        <header class="jumbotron text-center">
+        <header class="jumbotron text-center bg-warning">
             <a asp-action="Index" asp-controller="Home">
                 <img src="~/images/logo.png" class="img-fluid center-block" />
             </a>

@@ -17,11 +17,14 @@ namespace BoardGames_FinalProject.Models
                     new BoardGame
                     {
                         ID = item.ID,
-                        max_players = item.max_players,
-                        min_age = item.min_age,
                         name = item.name,
+                        min_age = item.min_age,
                         min_players = item.min_players,
-                        price = item.price
+                        max_players = item.max_players,
+                        price = item.price,
+                        price_ca = item.price_ca,
+                        description = item.description,
+                        image_url = item.image_url
                     }
                     );
 
