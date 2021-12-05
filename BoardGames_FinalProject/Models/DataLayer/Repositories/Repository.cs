@@ -7,16 +7,16 @@ namespace BoardGames_FinalProject.Models.DataLayer.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected BoardGameContext context { get; set; }
-        private DbSet<T> dbset { get; set; }
+        protected BoardGameContext Context { get; set; }
+        private DbSet<T> Dbset { get; set; }
         public Repository(BoardGameContext ctx)
         {
-            context = ctx;
-            dbset = context.Set<T>();
+            Context = ctx;
+            Dbset = Context.Set<T>();
         }
 
         private int? count;
-        public int Count => count ?? dbset.Count();
+        public int Count => count ?? Dbset.Count();
 
         public virtual IEnumerable<T> List(QueryOptions<T> options)
         {
@@ -24,22 +24,22 @@ namespace BoardGames_FinalProject.Models.DataLayer.Repositories
             return query.ToList();
         }
 
-        public virtual T Get(int id) => dbset.Find(id);
-        public virtual T Get(string id) => dbset.Find(id);
+        public virtual T Get(int id) => Dbset.Find(id);
+        public virtual T Get(string id) => Dbset.Find(id);
         public virtual T Get(QueryOptions<T> options)
         {
             IQueryable<T> query = BuildQuery(options);
             return query.FirstOrDefault();
         }
 
-        public virtual void Insert(T entity) => dbset.Add(entity);
-        public virtual void Update(T entity) => dbset.Update(entity);
-        public virtual void Delete(T entity) => dbset.Remove(entity);
-        public virtual void Save() => context.SaveChanges();
+        public virtual void Insert(T entity) => Dbset.Add(entity);
+        public virtual void Update(T entity) => Dbset.Update(entity);
+        public virtual void Delete(T entity) => Dbset.Remove(entity);
+        public virtual void Save() => Context.SaveChanges();
 
         private IQueryable<T> BuildQuery(QueryOptions<T> options)
         {
-            IQueryable<T> query = dbset;
+            IQueryable<T> query = Dbset;
             foreach (string include in options.GetIncludes())
             {
                 query = query.Include(include);

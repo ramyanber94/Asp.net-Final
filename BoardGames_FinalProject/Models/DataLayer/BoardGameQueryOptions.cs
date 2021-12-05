@@ -11,11 +11,11 @@ namespace BoardGames_FinalProject.Models.DataLayer
           
             if (builder.IsFilterByPrice) {
                 if (builder.CurrentRoute.PriceFilter == "under7")
-                    Where = b => Int32.Parse(b.price) < 7;
+                    Where = b => Convert.ToDouble(b.price) < 7;
                 else if (builder.CurrentRoute.PriceFilter == "7to14")
-                    Where = b => Int32.Parse(b.price) >= 7 && Int32.Parse(b.price) <= 14;
+                    Where = b => Convert.ToDouble(b.price) >= 7 && Convert.ToDouble(b.price) <= 14;
                 else
-                    Where = b => Int32.Parse(b.price) > 14;
+                    Where = b => Convert.ToDouble(b.price) > 14;
             }
          
 

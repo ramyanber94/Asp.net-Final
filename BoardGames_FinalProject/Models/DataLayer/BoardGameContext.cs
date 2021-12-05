@@ -22,10 +22,6 @@ namespace BoardGames_FinalProject.Models.DataLayer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<BoardGame>()
-            //    .Property(b => b.ID)
-            //    .ValueGeneratedOnAdd();
-            modelBuilder.Entity<BoardGame>().ToTable("BoardGames");
             modelBuilder.ApplyConfiguration(new SeedBoardGames());
         }
 

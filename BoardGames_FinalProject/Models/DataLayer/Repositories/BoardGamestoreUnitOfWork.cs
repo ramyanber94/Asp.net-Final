@@ -7,18 +7,18 @@ namespace BoardGamestore.Models
 {
     public class BoardGamestoreUnitOfWork : IBoardGamestoreUnitOfWork
     {
-        private BoardGameContext context { get; set; }
-        public BoardGamestoreUnitOfWork(BoardGameContext ctx) => context = ctx;
+        private BoardGameContext Context { get; set; }
+        public BoardGamestoreUnitOfWork(BoardGameContext ctx) => Context = ctx;
 
         private Repository<BoardGame> boardGameData;
         public Repository<BoardGame> BoardGames {
             get {
                 if (boardGameData == null)
-                    boardGameData = new Repository<BoardGame>(context);
+                    boardGameData = new Repository<BoardGame>(Context);
                 return boardGameData;
             }
         }
 
-        public void Save() => context.SaveChanges();
+        public void Save() => Context.SaveChanges();
     }
 }

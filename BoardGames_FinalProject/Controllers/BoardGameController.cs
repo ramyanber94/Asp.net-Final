@@ -7,6 +7,7 @@ using BoardGames_FinalProject.Services;
 using BoardGamestore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ServiceStack.Text;
 using System;
 using System.Threading.Tasks;
 
@@ -18,8 +19,9 @@ namespace BoardGames_FinalProject.Controllers
         public BoardGameController(BoardGameContext context)
         {
             _context = context;
+            data = new BoardGamestoreUnitOfWork(context);
         }
-        private BoardGamestoreUnitOfWork data { get; set; }
+        private BoardGamestoreUnitOfWork data;
         public async Task<IActionResult> Details(string id)
         {
             var boardGame = await _context.BoardGames
@@ -28,8 +30,9 @@ namespace BoardGames_FinalProject.Controllers
             return View(boardGame);
         }
 
-        public IActionResult List(BoardGamesGridDTO values)
+        public async Task<IActionResult> ListAsync(BoardGamesGridDTO values)
         {
+
             var builder = new BoardGamesGridBuilder(HttpContext.Session, values,
             defaultSortField: nameof(BoardGame.name));
 

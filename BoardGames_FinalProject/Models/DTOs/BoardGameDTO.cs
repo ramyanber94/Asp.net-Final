@@ -12,7 +12,7 @@ namespace BoardGames_FinalProject.Models.DTOs
         {
             BoardGameId = boardGame.ID;
             Name = boardGame.name;
-            Price = Int32.Parse(boardGame.price);
+            Price = Convert.ToDouble(boardGame.price);
         }
     }
 }
