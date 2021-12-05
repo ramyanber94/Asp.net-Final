@@ -1,0 +1,29 @@
+﻿@using BoardGames_FinalProject.Models
+@model BoardGame
+
+@{
+    ViewData["Title"] = " | BoardGame Details";
+}
+
+<h1>BoardGame Details</h1>
+
+  
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr class="thead-dark">
+                    <th>Title:</th><th>@Html.DisplayFor(model => model.name)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                </tr>
+                <tr><td>Price:</td><td>@Html.DisplayFor(model => model.price)</td></tr>
+            </tbody>
+        </table>
+
+
+<form asp-action="Add" asp-controller="Cart" method="post">
+    <button type="submit" name="id" value="@Model.ID"
+        class="btn btn-primary">Add To Cart</button>
+</form>
+        

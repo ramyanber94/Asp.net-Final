@@ -1,0 +1,43 @@
+﻿@using BoardGames_FinalProject.Models
+@model CartItem
+
+@{
+    ViewData["Title"] = " | Edit Cart";
+}
+
+<h1>Edit Cart Item</h1>
+<form asp-action="Edit" method="post">
+    <ul class="list-group mb-2">
+        <li class="list-group-item">@Model.BoardGame.Name</li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-1">
+                    <label>Price:</label>
+                </div>
+                <div class="col">
+                    @Model.BoardGame.Price.ToString("c")
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="form-row">
+                <div class="col-1">
+                    <label asp-for="Quantity">Quantity:</label>
+                </div>
+                <div class="col">
+                    <select asp-for="Quantity" class="form-control">
+                        @for (int i = 1; i <= 10; i++)
+                        {
+                            <option>@i</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <input type="hidden" asp-for="BoardGame.BoardGameId" />
+    <input type="hidden" asp-for="BoardGame.Name" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" asp-controller="Cart" class="btn btn-primary">Cancel</a>
+</form>

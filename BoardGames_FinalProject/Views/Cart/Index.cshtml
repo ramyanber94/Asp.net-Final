@@ -1,0 +1,68 @@
+﻿@using BoardGames_FinalProject.Models
+@model CartViewModel
+
+@{
+    ViewData["Title"] = " | Cart";
+}
+
+<h1>Your Cart</h1>
+
+<form asp-action="Clear" method="post">
+    <ul class="list-group mb-4">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col">
+                    Subtotal: @Model.Subtotal.ToString("c")
+                </div>
+                <div class="col">
+                    <div class="float-right">
+                        <a asp-action="Checkout" class="btn btn-primary">Checkout</a>
+                        <button type="submit" class="btn btn-primary">Clear Cart</button>
+                        <a asp-action="List" asp-controller="BoardGame"
+                           asp-all-route-data="@Model.BoardGameGridRoute">Back to Shopping</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+    </ul>
+</form>
+<form asp-action="Remove" method="post">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (CartItem item in Model.List)  {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-controller="BoardGame"
+                           asp-route-id="@item.BoardGame.BoardGameId"
+                           asp-route-slug="@item.BoardGame.Name">
+                            @item.BoardGame.Name
+                        </a>
+                    </td>
+                    <td>@item.BoardGame.Price.ToString("c")</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Subtotal.ToString("c")</td>
+                    <td>
+                        <div class="float-right">
+                            <a asp-action="Edit" asp-controller="Cart"
+                               asp-route-id="@item.BoardGame.BoardGameId"
+                               asp-route-slug="@item.BoardGame.Name"
+                               class="btn btn-primary">Edit</a>
+                            <button type="submit" name="id" value="@item.BoardGame.BoardGameId"
+                                    class="btn btn-primary">Remove</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

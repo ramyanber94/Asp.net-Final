@@ -1,0 +1,74 @@
+﻿@using BoardGames_FinalProject.Models
+@using BoardGames_FinalProject.Models.Grid
+@using BoardGames_FinalProject.Models.ViewModels
+@model BoardGameListViewModel
+
+@{
+    ViewData["Title"] = " | BoardGame Catalog";
+
+    // aliases to make paging, sorting, and filtering code shorter
+    RouteDictionary current = Model.CurrentRoute;
+    RouteDictionary routes = Model.CurrentRoute.Clone();
+
+}
+
+<h1>Board Game Catalog</h1>
+@* add to cart form *@
+<form asp-action="Add" asp-controller="Cart" method="post">
+    <table class="table table-bordered table-striped table-sm">
+        @* for each table column, update the route dictionary with the field to sort by, and then use
+            that route dictionary and the current route to create route segments for sorting link *@
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @{ routes.SetSortAndDirection(nameof(BoardGame.name), current); }
+                    <a asp-action="List" asp-all-route-data="@routes"
+                       class="text-white">Title</a>
+                </th>
+                <th>
+                    @{ routes.SetSortAndDirection(nameof(BoardGame.price), current); }
+                    <a asp-action="List" asp-all-route-data="@routes"
+                       class="text-white">Price</a>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BoardGame boardGame in Model.BoardGames)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@boardGame.ID"
+                           asp-route-slug="@boardGame.name">
+                            @boardGame.name
+                        </a>
+                    </td>
+                    <td>@boardGame.price</td>
+                    <td>
+                        <button type="submit" name="id" value="@boardGame.ID"
+                                class="btn btn-primary">
+                            Add To Cart
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+@* paging links *@
+@{
+    @* Reset the route dictionary to the current route values. This is necessary
+        to clear the changes made while creating the sorting links above. Clone so
+        don't overwrite current route segment values. *@
+    routes = Model.CurrentRoute.Clone();
+
+    @* update route dictionary with page number in 'i' and then use
+        updated route dictionary to create route segments for paging link.*@
+    for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        routes.PageNumber = i;
+        <a asp-action="List" asp-all-route-data="@routes"
+           class="btn btn-outline-primary @Nav.Active(i, current.PageNumber)">@i</a>
+    }
+}
