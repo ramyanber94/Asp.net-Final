@@ -95,7 +95,7 @@ namespace BoardGames_FinalProject.Controllers
             if (item == null)
             {
                 TempData["message"] = "Unable to locate cart item";
-                return RedirectToAction("List");
+                return RedirectToAction("Index");
             }
             else
             {
