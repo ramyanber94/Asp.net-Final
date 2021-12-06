@@ -1,4 +1,5 @@
 
+using BoardGames_FinalProject.Data;
 using BoardGames_FinalProject.Models;
 using BoardGames_FinalProject.Models.DataLayer;
 using BoardGames_FinalProject.Services;
@@ -11,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +32,8 @@ namespace BoardGames_FinalProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
             services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddMemoryCache();
@@ -52,6 +56,8 @@ namespace BoardGames_FinalProject
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            StripeConfiguration.ApiKey = (Configuration.GetSection("Stripe")["SecretKey"]);
+
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -44,11 +44,16 @@
                         @boardGame.name
                     </a>
                 </td>
-                <td><img src="@boardGame.image_url" alt="@boardGame.name" width="100" class="img-thumbnail" /></td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@boardGame.ID"
+                       asp-route-slug="@boardGame.name">
+                        <img src="@boardGame.image_url" alt="@boardGame.name" width="100" class="img-thumbnail" />
+                    </a>
+                </td>
                 <td>@boardGame.price_ca</td>
                 <td>
                     <button type="submit" name="id" value="@boardGame.ID"
-                            class="btn btn-primary">
+                            class="btn btn-success">
                         Add To Cart
                     </button>
                 </td>

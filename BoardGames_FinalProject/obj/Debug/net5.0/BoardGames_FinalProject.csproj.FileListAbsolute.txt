@@ -340,3 +340,5 @@ C:\Users\lfcla\source\repos\AspNet_FINAL_CART\Asp.net-Final\BoardGames_FinalProj
 C:\Users\lfcla\source\repos\AspNet_FINAL_CART\Asp.net-Final\BoardGames_FinalProject\obj\Debug\net5.0\BoardGames_FinalProject.genruntimeconfig.cache
 C:\Users\lfcla\source\repos\AspNet_FINAL_CART\Asp.net-Final\BoardGames_FinalProject\obj\Debug\net5.0\BoardGames_FinalProject.csproj.CopyComplete
 C:\Users\lfcla\source\repos\AspNet_FINAL_CART\Asp.net-Final\BoardGames_FinalProject\obj\Debug\net5.0\BoardGames_FinalProject.csproj.AssemblyReference.cache
+C:\Users\lfcla\source\repos\AspNet_FINAL_CART\Asp.net-Final\BoardGames_FinalProject\bin\Debug\net5.0\Stripe.net.dll
+C:\Users\lfcla\source\repos\AspNet_FINAL_CART\Asp.net-Final\BoardGames_FinalProject\obj\Debug\net5.0\Razor\Views\Cart\Processing.cshtml.g.cs

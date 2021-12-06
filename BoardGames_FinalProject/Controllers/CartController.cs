@@ -5,6 +5,10 @@ using BoardGames_FinalProject.Models.DTOs;
 using BoardGames_FinalProject.Models.Grid;
 using BoardGames_FinalProject.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
 
 namespace BoardGames_FinalProject.Controllers
 {
@@ -114,6 +118,56 @@ namespace BoardGames_FinalProject.Controllers
             return RedirectToAction("Index");
         }
 
-        public ViewResult Checkout() => View();
+        //public ViewResult Checkout() => View();
+
+        //[TempData]
+        //public string TotalAmount { get; set; }
+        public IActionResult Checkout()
+        {
+            Cart cart = GetCart();
+            ViewBag.cart = cart;
+            ViewBag.total = Math.Round(cart.Subtotal, 2) * 100;
+            ViewBag.total = Convert.ToInt64(ViewBag.total);
+            //long total = ViewBag.total;
+            //TotalAmount = total.ToString();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Processing(string stripeToken, string stripeEmail)
+        {
+            var optionsCust = new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                Name = "Test",
+                Phone = "123-456-7890"
+
+            };
+            var serviceCust = new CustomerService();
+            Customer customer = serviceCust.Create(optionsCust);
+            var optionsCharge = new ChargeCreateOptions
+            {
+                /*Amount = HttpContext.Session.GetLong("Amount")*/
+                Amount = Convert.ToInt64(TempData["TotalAmount"]),
+                Currency = "CAD",
+                Description = "Buying Board Games",
+                Source = stripeToken,
+                ReceiptEmail = stripeEmail,
+
+            };
+            var service = new ChargeService();
+            Charge charge = service.Create(optionsCharge);
+            if (charge.Status == "succeeded")
+            {
+                string BalanceTransactionId = charge.BalanceTransactionId;
+                ViewBag.AmountPaid = Convert.ToDecimal(charge.Amount) % 100 / 100 + (charge.Amount) / 100;
+                ViewBag.BalanceTxId = BalanceTransactionId;
+                ViewBag.Customer = customer.Name;
+                //return View();
+            }
+
+            return View();
+        }
+
     }
 }

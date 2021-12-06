@@ -6,7 +6,7 @@
 }
 
 <h1 class="display-3">@Model.name</h1>
-<h3 class="display-5">$ @Model.price</h3>
+<h3 class="display-5">$ @Model.price_ca</h3>
 
 <div class="row">
     <div class="col">
@@ -20,7 +20,7 @@
 
 <form asp-action="Add" asp-controller="Cart" method="post" class="mx-auto">
     <button type="submit" name="id" value="@Model.ID"
-            class="btn btn-primary">
+            class="btn btn-success">
         Add To Cart
     </button>
 </form>

@@ -79,6 +79,10 @@
             "ServiceStack.Text": {
               "target": "Package",
               "version": "[5.13.2, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[39.80.0, )"
             }
           },
           "imports": [
