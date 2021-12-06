@@ -27,7 +27,7 @@
 <div class="text-center">
     <form asp-action="Processing" asp-controller="Cart" method="post">
         <article>
-            <label>Amount: $ @ViewBag.total</label>
+            <label>Amount: @String.Format("{0:c}", ViewBag.total / 100.00)</label>
         </article>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="@Stripe.Value.PublishableKey"
@@ -39,4 +39,6 @@
                 data-zip-code="true">
         </script>
     </form>
+    <br />
+    <a class="btn btn-danger text-center" asp-action="List" asp-controller="BoardGame">Back to Shopping</a>
 </div>

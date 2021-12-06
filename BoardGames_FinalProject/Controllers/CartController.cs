@@ -120,16 +120,16 @@ namespace BoardGames_FinalProject.Controllers
 
         //public ViewResult Checkout() => View();
 
-        //[TempData]
-        //public string TotalAmount { get; set; }
+        [TempData]
+        public string TotalAmount { get; set; }
         public IActionResult Checkout()
         {
             Cart cart = GetCart();
             ViewBag.cart = cart;
             ViewBag.total = Math.Round(cart.Subtotal, 2) * 100;
             ViewBag.total = Convert.ToInt64(ViewBag.total);
-            //long total = ViewBag.total;
-            //TotalAmount = total.ToString();
+            long total = ViewBag.total;
+            TotalAmount = total.ToString();
             return View();
         }
 
